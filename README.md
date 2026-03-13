@@ -2,6 +2,10 @@
 
 Webpack 5 Module Federation tabanlı bu demo, shell container ile iki remote microfrontend (`product`, `cart`) üzerinden basit bir e-ticaret deneyimi gösterir. Tüm uygulamalar TypeScript ile yazıldı ve ortak tipler, event bus, UI bileşenleri workspaces altında toplandı.
 
+## Ekran Goruntusu
+
+![mf-enterprise-demo ekran goruntusu](docs/screenshot.png)
+
 ## Mimari Diyagram
 
 ```text

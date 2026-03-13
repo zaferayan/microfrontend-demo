@@ -63,8 +63,8 @@ export const ProductDetailsPage: React.FC = () => {
 
   return (
     <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-      <div className="overflow-hidden rounded-[32px] bg-white shadow-panel">
-        <img className="h-full w-full object-cover" src={product.image} alt={product.name} />
+      <div className="flex items-center justify-center overflow-hidden rounded-[32px] bg-white p-8 shadow-panel">
+        <img className="max-h-[420px] w-full object-contain" src={product.image} alt={product.name} />
       </div>
 
       <div className="rounded-[32px] bg-white p-8 shadow-panel">

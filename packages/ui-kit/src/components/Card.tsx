@@ -12,8 +12,8 @@ export interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ image, title, description, footer, className }) => (
   <article className={classNames('overflow-hidden rounded-[28px] bg-white shadow-panel ring-1 ring-slate-200', className)}>
-    <div className="aspect-[4/3] overflow-hidden bg-slate-100">
-      <img className="h-full w-full object-cover" src={image} alt={title} />
+    <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-slate-50 p-6">
+      <img className="h-full w-full object-contain" src={image} alt={title} loading="lazy" />
     </div>
     <div className="space-y-3 p-5">
       <h3 className="text-xl font-semibold text-ink-900">{title}</h3>
