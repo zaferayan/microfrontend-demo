@@ -1,12 +1,14 @@
 # mf-enterprise-demo
 
-Webpack 5 Module Federation tabanlı bu demo, shell container ile iki remote microfrontend (`product`, `cart`) üzerinden basit bir e-ticaret deneyimi gösterir. Tüm uygulamalar TypeScript ile yazıldı ve ortak tipler, event bus, UI bileşenleri workspaces altında toplandı.
+**English** | [Türkçe](README.tr.md)
 
-## Ekran Görüntüsü
+This Webpack 5 Module Federation demo shows a simple e-commerce flow built with a shell container and two remote microfrontends: `product` and `cart`. All apps are written in TypeScript, and shared types, the event bus, and UI components are organized under workspaces.
 
-![mf-enterprise-demo ekran görüntüsü](docs/screenshot.png)
+## Screenshot
 
-## Mimari Diyagram
+![mf-enterprise-demo screenshot](docs/screenshot.png)
+
+## Architecture Diagram
 
 ```text
 mf-enterprise-demo/
@@ -30,14 +32,14 @@ Shell (localhost:3000)
    \-- shares --> react, react-dom, react-router-dom, @mf-demo/shared, @mf-demo/ui-kit
 ```
 
-## Kurulum ve Çalıştırma
+## Setup and Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Tek tek çalıştırmak için:
+To run each app individually:
 
 ```bash
 npm run dev -w apps/shell
@@ -45,59 +47,59 @@ npm run dev -w apps/product
 npm run dev -w apps/cart
 ```
 
-## GitHub Pages Deploy
+## GitHub Pages Deployment
 
-Bu repo `main` branch'e push edildiğinde GitHub Actions ile otomatik olarak GitHub Pages'e deploy olacak. Workflow dosyası: `.github/workflows/deploy-pages.yml`
+This repository deploys automatically to GitHub Pages when changes are pushed to the `main` branch. Workflow file: `.github/workflows/deploy-pages.yml`
 
-Pages build'ini lokalde almak için:
+To build the Pages artifact locally:
 
 ```bash
 npm run build:pages
 ```
 
-Üretilen statik artifact `dist-pages/` altına yazılır.
+The generated static artifact is written to `dist-pages/`.
 
-GitHub Pages üzerinde shell uygulaması `HashRouter` ile çalışır; bu sayede SPA route'ları için ek rewrite gerekmez. Beklenen URL formatı:
+On GitHub Pages, the shell app runs with `HashRouter`, so no extra SPA rewrite rules are required. Expected URL format:
 
 - Shell: [https://zaferayan.github.io/microfrontend-demo/#/products](https://zaferayan.github.io/microfrontend-demo/#/products)
 - Product standalone: [https://zaferayan.github.io/microfrontend-demo/product/#/products](https://zaferayan.github.io/microfrontend-demo/product/#/products)
 - Cart standalone: [https://zaferayan.github.io/microfrontend-demo/cart/#/cart](https://zaferayan.github.io/microfrontend-demo/cart/#/cart)
 
-### Kendi GitHub Pages'ında Yayınlamak
+### Publish on Your Own GitHub Pages
 
-Bu projeyi kendi hesabınızda yayınlamak için:
+To publish this project from your own account:
 
-1. Repoyu kendi GitHub hesabınıza fork edin ya da yeni bir repo oluşturup kodu push edin.
-2. Varsayılan branch'in `main` olduğundan emin olun.
-3. GitHub'da `Settings > Pages > Build and deployment > Source` değerini `GitHub Actions` olarak seçin.
-4. `main` branch'e push yapın.
-5. `Actions` sekmesinde `Deploy GitHub Pages` workflow'unun başarıyla tamamlanmasını bekleyin.
+1. Fork this repository to your GitHub account, or create a new repository and push the code there.
+2. Make sure the default branch is `main`.
+3. In GitHub, go to `Settings > Pages > Build and deployment > Source` and select `GitHub Actions`.
+4. Push to the `main` branch.
+5. Wait for the `Deploy GitHub Pages` workflow to complete successfully in the `Actions` tab.
 
-Bu projede Pages URL'leri repo sahibi ve repo adından otomatik türetilir. Örnek:
+In this project, Pages URLs are generated automatically from the repository owner and repository name. Example:
 
-- Shell: `https://<github-kullanıcı-adı>.github.io/<repo-adı>/#/products`
-- Product standalone: `https://<github-kullanıcı-adı>.github.io/<repo-adı>/product/#/products`
-- Cart standalone: `https://<github-kullanıcı-adı>.github.io/<repo-adı>/cart/#/cart`
+- Shell: `https://<github-username>.github.io/<repo-name>/#/products`
+- Product standalone: `https://<github-username>.github.io/<repo-name>/product/#/products`
+- Cart standalone: `https://<github-username>.github.io/<repo-name>/cart/#/cart`
 
-Notlar:
+Notes:
 
-- `main` yerine farklı bir branch kullanacaksanız `.github/workflows/deploy-pages.yml` içindeki branch tetikleyicisini güncelleyin.
-- Custom domain kullanacaksanız workflow env tarafında `PAGES_ORIGIN` ve gerekiyorsa `PAGES_BASE_PATH` tanımlayın.
+- If you use a branch other than `main`, update the branch trigger in `.github/workflows/deploy-pages.yml`.
+- If you use a custom domain, define `PAGES_ORIGIN` and, if needed, `PAGES_BASE_PATH` in the workflow environment.
 
-## Portlar ve URL'ler
+## Ports and URLs
 
 - Shell: `http://localhost:3000`
 - Product micro app: `http://localhost:3001/products`
 - Cart micro app: `http://localhost:3002/cart`
 
-## Module Federation Yapısı
+## Module Federation Setup
 
-- `apps/shell/webpack.config.js`: `name: "shell"`, `remotes` olarak `product` ve `cart` tanımlar.
-- `apps/product/webpack.config.js`: `name: "product"`, `./App` remote modülünü expose eder.
-- `apps/cart/webpack.config.js`: `name: "cart"`, `./App` remote modülünü expose eder.
-- Tüm app'ler `react`, `react-dom`, `react-router-dom`, `@mf-demo/shared`, `@mf-demo/ui-kit` paketlerini `singleton` olarak share eder.
+- `apps/shell/webpack.config.js`: defines `name: "shell"` and registers `product` and `cart` as remotes.
+- `apps/product/webpack.config.js`: defines `name: "product"` and exposes `./App` as a remote module.
+- `apps/cart/webpack.config.js`: defines `name: "cart"` and exposes `./App` as a remote module.
+- All apps share `react`, `react-dom`, `react-router-dom`, `@mf-demo/shared`, and `@mf-demo/ui-kit` as singletons.
 
-## Event Bus Akışı
+## Event Bus Flow
 
 ```text
 Product remote
@@ -113,7 +115,7 @@ Shell header
   -> updates cart badge
 ```
 
-## Teknoloji Stack
+## Tech Stack
 
 - React 18
 - TypeScript
