@@ -1,6 +1,6 @@
 // This file exposes the cart remote application routes and provider setup.
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { CartPage } from './components/CartPage';
 import { CartProvider } from './context/CartContext';
 
@@ -12,8 +12,7 @@ export const App: React.FC = () => {
   return (
     <CartProvider>
       <Routes>
-        <Route path="/" element={<Navigate to="/cart" replace />} />
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/" element={<CartPage />} />
       </Routes>
     </CartProvider>
   );

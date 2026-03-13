@@ -1,7 +1,6 @@
-<!-- This file documents the Module Federation demo and how to run it. -->
 # mf-enterprise-demo
 
-Webpack 5 Module Federation tabanli bu demo, shell container ile iki remote microfrontend (`product`, `cart`) uzerinden basit bir e-ticaret deneyimi gosterir. Tum uygulamalar TypeScript ile yazildi ve ortak tipler, event bus, UI bilesenleri workspaces altinda toplandi.
+Webpack 5 Module Federation tabanlı bu demo, shell container ile iki remote microfrontend (`product`, `cart`) üzerinden basit bir e-ticaret deneyimi gösterir. Tüm uygulamalar TypeScript ile yazıldı ve ortak tipler, event bus, UI bileşenleri workspaces altında toplandı.
 
 ## Mimari Diyagram
 
@@ -27,14 +26,14 @@ Shell (localhost:3000)
    \-- shares --> react, react-dom, react-router-dom, @mf-demo/shared, @mf-demo/ui-kit
 ```
 
-## Kurulum ve Calistirma
+## Kurulum ve Çalıştırma
 
 ```bash
 npm install
 npm run dev
 ```
 
-Tek tek calistirmak icin:
+Tek tek çalıştırmak için:
 
 ```bash
 npm run dev -w apps/shell
@@ -48,14 +47,14 @@ npm run dev -w apps/cart
 - Product micro app: `http://localhost:3001/products`
 - Cart micro app: `http://localhost:3002/cart`
 
-## Module Federation Yapisi
+## Module Federation Yapısı
 
-- `apps/shell/webpack.config.js`: `name: "shell"`, `remotes` olarak `product` ve `cart` tanimlar.
-- `apps/product/webpack.config.js`: `name: "product"`, `./App` remote modulunu expose eder.
-- `apps/cart/webpack.config.js`: `name: "cart"`, `./App` remote modulunu expose eder.
-- Tum app'ler `react`, `react-dom`, `react-router-dom`, `@mf-demo/shared`, `@mf-demo/ui-kit` paketlerini `singleton` olarak share eder.
+- `apps/shell/webpack.config.js`: `name: "shell"`, `remotes` olarak `product` ve `cart` tanımlar.
+- `apps/product/webpack.config.js`: `name: "product"`, `./App` remote modülünü expose eder.
+- `apps/cart/webpack.config.js`: `name: "cart"`, `./App` remote modülünü expose eder.
+- Tüm app'ler `react`, `react-dom`, `react-router-dom`, `@mf-demo/shared`, `@mf-demo/ui-kit` paketlerini `singleton` olarak share eder.
 
-## Event Bus Akisi
+## Event Bus Akışı
 
 ```text
 Product remote

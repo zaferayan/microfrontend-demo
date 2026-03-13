@@ -7,9 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev -w apps/shell\" \"npm run dev -w apps/product\" \"npm run dev -w apps/cart\"",
+    "dev": "concurrently --names shell,product,cart --prefix-colors blue,magenta,green \"npm run dev -w apps/shell\" \"npm run dev -w apps/product\" \"npm run dev -w apps/cart\"",
     "build": "npm run build -w packages/shared && npm run build -w packages/ui-kit && npm run build -w apps/product && npm run build -w apps/cart && npm run build -w apps/shell",
-    "start": "concurrently \"npm start -w apps/shell\" \"npm start -w apps/product\" \"npm start -w apps/cart\""
+    "start": "concurrently --names shell,product,cart --prefix-colors blue,magenta,green \"npm start -w apps/shell\" \"npm start -w apps/product\" \"npm start -w apps/cart\""
   },
   "dependencies": {
     "react": "18.3.1",
