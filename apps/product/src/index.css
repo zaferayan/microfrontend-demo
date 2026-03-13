@@ -1,0 +1,15 @@
+/* This file loads shared Tailwind layers and local product styles. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(180deg, #fffaf5 0%, #f8fbff 100%);
+  color: #102033;
+}
+
+* {
+  box-sizing: border-box;
+}

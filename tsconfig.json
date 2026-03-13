@@ -1,0 +1,20 @@
+{
+  "extends": "./packages/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@mf-demo/shared": [
+        "packages/shared/src"
+      ],
+      "@mf-demo/shared/*": [
+        "packages/shared/src/*"
+      ],
+      "@mf-demo/ui-kit": [
+        "packages/ui-kit/src"
+      ],
+      "@mf-demo/ui-kit/*": [
+        "packages/ui-kit/src/*"
+      ]
+    }
+  }
+}

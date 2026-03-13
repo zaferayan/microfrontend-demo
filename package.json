@@ -1,0 +1,37 @@
+{
+  "name": "mf-enterprise-demo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w apps/shell\" \"npm run dev -w apps/product\" \"npm run dev -w apps/cart\"",
+    "build": "npm run build -w packages/shared && npm run build -w packages/ui-kit && npm run build -w apps/product && npm run build -w apps/cart && npm run build -w apps/shell",
+    "start": "concurrently \"npm start -w apps/shell\" \"npm start -w apps/product\" \"npm start -w apps/cart\""
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-router-dom": "6.30.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.13.11",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
+    "autoprefixer": "10.4.20",
+    "concurrently": "9.1.2",
+    "css-loader": "7.1.2",
+    "html-webpack-plugin": "5.6.3",
+    "postcss": "8.5.3",
+    "postcss-loader": "8.1.1",
+    "style-loader": "4.0.0",
+    "tailwindcss": "3.4.17",
+    "ts-loader": "9.5.2",
+    "typescript": "5.8.2",
+    "webpack": "5.98.0",
+    "webpack-cli": "6.0.1",
+    "webpack-dev-server": "5.2.0"
+  }
+}
