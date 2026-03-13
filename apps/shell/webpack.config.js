@@ -1,11 +1,24 @@
 // This file configures the shell container build, routing host, and remotes.
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { container } = require('webpack');
+const { getPagesConfig, isGitHubPagesBuild } = require('../../pages.config.cjs');
 
+const { container, DefinePlugin } = webpack;
 const { ModuleFederationPlugin } = container;
 const deps = require('./package.json').dependencies;
 const rootDir = path.resolve(__dirname, '../..');
+const useHashRouter = isGitHubPagesBuild();
+const pagesConfig = getPagesConfig();
+const remoteBaseUrls = useHashRouter
+  ? {
+      product: `product@${pagesConfig.remoteEntryUrl('product')}`,
+      cart: `cart@${pagesConfig.remoteEntryUrl('cart')}`
+    }
+  : {
+      product: 'product@http://localhost:3001/remoteEntry.js',
+      cart: 'cart@http://localhost:3002/remoteEntry.js'
+    };
 
 module.exports = {
   entry: './src/index.tsx',
@@ -61,10 +74,7 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: 'shell',
-      remotes: {
-        product: 'product@http://localhost:3001/remoteEntry.js',
-        cart: 'cart@http://localhost:3002/remoteEntry.js'
-      },
+      remotes: remoteBaseUrls,
       shared: {
         react: { singleton: true, requiredVersion: deps.react },
         'react-dom': { singleton: true, requiredVersion: deps['react-dom'] },
@@ -72,6 +82,9 @@ module.exports = {
         '@mf-demo/shared': { singleton: true, requiredVersion: deps['@mf-demo/shared'] },
         '@mf-demo/ui-kit': { singleton: true, requiredVersion: deps['@mf-demo/ui-kit'] }
       }
+    }),
+    new DefinePlugin({
+      __USE_HASH_ROUTER__: JSON.stringify(useHashRouter)
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html'

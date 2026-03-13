@@ -1,11 +1,14 @@
 // This file configures the standalone product microfrontend build and dev server.
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { container } = require('webpack');
+const { isGitHubPagesBuild } = require('../../pages.config.cjs');
 
+const { container, DefinePlugin } = webpack;
 const { ModuleFederationPlugin } = container;
 const deps = require('./package.json').dependencies;
 const rootDir = path.resolve(__dirname, '../..');
+const useHashRouter = isGitHubPagesBuild();
 
 module.exports = {
   entry: './src/index.tsx',
@@ -72,6 +75,9 @@ module.exports = {
         '@mf-demo/shared': { singleton: true, requiredVersion: deps['@mf-demo/shared'] },
         '@mf-demo/ui-kit': { singleton: true, requiredVersion: deps['@mf-demo/ui-kit'] }
       }
+    }),
+    new DefinePlugin({
+      __USE_HASH_ROUTER__: JSON.stringify(useHashRouter)
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html'

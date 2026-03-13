@@ -45,6 +45,24 @@ npm run dev -w apps/product
 npm run dev -w apps/cart
 ```
 
+## GitHub Pages Deploy
+
+Bu repo `main` branch'e push edildiğinde GitHub Actions ile otomatik olarak GitHub Pages'e deploy olacak. Workflow dosyasi: `.github/workflows/deploy-pages.yml`
+
+Pages build'i lokalden almak icin:
+
+```bash
+npm run build:pages
+```
+
+Uretilen statik artifact `dist-pages/` altina yazilir.
+
+GitHub Pages uzerinde shell uygulamasi `HashRouter` ile calisir; bu sayede SPA route'lari icin ek rewrite gerekmez. Beklenen URL formati:
+
+- Shell: `https://zaferayan.github.io/microfrontend-demo/#/products`
+- Product standalone: `https://zaferayan.github.io/microfrontend-demo/product/#/products`
+- Cart standalone: `https://zaferayan.github.io/microfrontend-demo/cart/#/cart`
+
 ## Portlar ve URL'ler
 
 - Shell: `http://localhost:3000`

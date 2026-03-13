@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "concurrently --names shell,product,cart --prefix-colors cyan,gray,yellow \"npm run dev -w apps/shell\" \"npm run dev -w apps/product\" \"npm run dev -w apps/cart\"",
     "build": "npm run build -w packages/shared && npm run build -w packages/ui-kit && npm run build -w apps/product && npm run build -w apps/cart && npm run build -w apps/shell",
+    "build:pages": "DEPLOY_TARGET=github-pages npm run build && node scripts/prepare-pages.cjs",
     "start": "concurrently --names shell,product,cart --prefix-colors cyan,gray,yellow \"npm start -w apps/shell\" \"npm start -w apps/product\" \"npm start -w apps/cart\""
   },
   "dependencies": {
